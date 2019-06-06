@@ -1,6 +1,6 @@
 # Simple Graph lib:
 
-## Requiraments
+## Requirements
 
 Should support 2 types of graphs - directed and undirected with 3 operations:
 
