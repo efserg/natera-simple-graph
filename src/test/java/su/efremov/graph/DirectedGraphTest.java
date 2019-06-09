@@ -1,6 +1,7 @@
 package su.efremov.graph;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.emptyIterable;
 import static org.hamcrest.Matchers.is;
@@ -68,8 +69,9 @@ public class DirectedGraphTest {
 		Set<Integer> vertexes = graph.getVertexes();
 		assertThat(vertexes, containsInAnyOrder(1, 2));
 
-		assertThat(graph.isConnected(1, 2), is(true));
-		assertThat(graph.isConnected(2, 1), is(false));
+		assertThat(graph.getAdjacentVertices(1), contains(2));
+		assertThat(graph.getAdjacentVertices(2), is(notNullValue()));
+		assertThat(graph.getAdjacentVertices(2), is(emptyIterable()));
 	}
 
 	@Test

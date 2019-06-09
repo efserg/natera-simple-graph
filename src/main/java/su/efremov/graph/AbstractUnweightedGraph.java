@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 import com.google.common.collect.ImmutableSet;
+import su.efremov.path.PathFinderStrategy;
 
 public abstract class AbstractUnweightedGraph<V> implements Graph<V> {
 
@@ -36,13 +37,8 @@ public abstract class AbstractUnweightedGraph<V> implements Graph<V> {
 	}
 
 	@Override
-	public boolean isConnected(V from, V to) {
-		return adjacentVertices.getOrDefault(from, ImmutableSet.of()).contains(to);
-	}
-
-	@Override
-	public Iterable<V> findPath(V from, V to) {
-		return null;
+	public Iterable<V> findPath(PathFinderStrategy<V> strategy, V start, V end) {
+		return strategy.findPath(this, start, end);
 	}
 
 	@Override
