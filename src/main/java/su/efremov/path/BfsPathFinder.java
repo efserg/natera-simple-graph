@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableList;
 import su.efremov.graph.Graph;
 
-public class DfsPathFinder<V> implements PathFinderStrategy<V> {
+public class BfsPathFinder<V> implements PathFinderStrategy<V> {
 	private Map<V, V> connectedVertexes;
 	private Set<V> visitedVertexes;
 	private Graph<V> graph;
@@ -19,8 +20,27 @@ public class DfsPathFinder<V> implements PathFinderStrategy<V> {
 		this.graph = graph;
 		this.connectedVertexes = new HashMap<>();
 		this.visitedVertexes = new HashSet<>();
-		dfs(start);
+		bfs(start);
 		return path(start, end);
+	}
+
+	private void bfs(final V start) {
+		final Queue<V> queue = new LinkedList<>();
+
+		queue.add(start);
+
+		while (!queue.isEmpty()) {
+			final V next = queue.poll();
+//			visitedVertexes.add(next);
+			graph.getAdjacentVertices(next).stream()
+					.filter(v -> !visitedVertexes.contains(v))
+					.forEachOrdered(v -> {
+						connectedVertexes.put(v, next);
+						visitedVertexes.add(v);
+						queue.add(v);
+					});
+		}
+
 	}
 
 	@SuppressWarnings("Duplicates")
@@ -35,16 +55,6 @@ public class DfsPathFinder<V> implements PathFinderStrategy<V> {
 		}
 		path.addFirst(start);
 		return ImmutableList.copyOf(path);
-	}
-
-	private void dfs(final V start) {
-		visitedVertexes.add(start);
-		graph.getAdjacentVertices(start).stream()
-				.filter(o -> !visitedVertexes.contains(o))
-				.forEach(vertex -> {
-					connectedVertexes.put(vertex, start);
-					dfs(vertex);
-				});
 	}
 
 }

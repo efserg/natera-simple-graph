@@ -2,7 +2,7 @@ package su.efremov;
 
 import su.efremov.graph.Graph;
 import su.efremov.graph.UndirectedGraph;
-import su.efremov.path.DfsPathFinder;
+import su.efremov.path.BfsPathFinder;
 
 public class NateraSimpleGraph {
 	public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class NateraSimpleGraph {
 				.addEdge(2, 4)
 				.addEdge(3, 4)
 				.addEdge(3, 5);
-		Iterable<Integer> path = integerGraph.findPath(new DfsPathFinder<>(), 0, 5);
-		System.out.println();
+		Iterable<Integer> path = integerGraph.findPath(new BfsPathFinder<>(), 0, 5);
+		System.out.println(path);
 	}
 }
