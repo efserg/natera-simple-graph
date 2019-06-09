@@ -1,7 +1,6 @@
 package su.efremov.graph;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,7 +41,7 @@ public abstract class AbstractUnweightedGraph<V> implements Graph<V> {
 	}
 
 	@Override
-	public List<V> getPath(V from, V to) {
+	public Iterable<V> findPath(V from, V to) {
 		return null;
 	}
 
@@ -51,7 +50,12 @@ public abstract class AbstractUnweightedGraph<V> implements Graph<V> {
 		return adjacentVertices.keySet();
 	}
 
-	protected Map<V, Set<V>> getAdjacentVertices() {
-		return adjacentVertices;
+	@Override
+	public Set<V> getAdjacentVertices(V vertex) {
+		return ImmutableSet.copyOf(adjacentVertices(vertex));
+	}
+
+	protected Set<V> adjacentVertices(V vertex) {
+		return adjacentVertices.getOrDefault(vertex, ImmutableSet.of());
 	}
 }

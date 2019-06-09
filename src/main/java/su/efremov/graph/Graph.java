@@ -1,7 +1,6 @@
 package su.efremov.graph;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 public interface Graph<V> {
@@ -12,9 +11,11 @@ public interface Graph<V> {
 
 	Graph<V> addEdge(V from, V to);
 
-	List<V> getPath(V from, V to);
+	Iterable<V> findPath(V from, V to);
 
 	Set<V> getVertexes();
+
+	Set<V> getAdjacentVertices(V vertex);
 
 	boolean isConnected(V from, V to);
 

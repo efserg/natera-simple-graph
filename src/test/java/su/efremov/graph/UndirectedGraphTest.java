@@ -26,11 +26,11 @@ public class UndirectedGraphTest {
 
 	@Test
 	public void shouldAddAndReturnVertex() {
-		graph.addVertex(1);
-		graph.addVertex(3);
-		graph.addVertex(5);
-		graph.addVertex(7);
-		graph.addVertex(11);
+		graph.addVertex(1)
+				.addVertex(3)
+				.addVertex(5)
+				.addVertex(7)
+				.addVertex(11);
 
 		Set<Integer> vertexes = graph.getVertexes();
 
@@ -39,11 +39,11 @@ public class UndirectedGraphTest {
 
 	@Test
 	public void shouldNotContainsRepetitiveVertex() {
-		graph.addVertex(3);
-		graph.addVertex(5);
-		graph.addVertex(5);
-		graph.addVertex(5);
-		graph.addVertex(3);
+		graph.addVertex(3)
+				.addVertex(5)
+				.addVertex(5)
+				.addVertex(5)
+				.addVertex(3);
 
 		Set<Integer> vertexes = graph.getVertexes();
 
@@ -70,4 +70,17 @@ public class UndirectedGraphTest {
 		assertThat(graph.isConnected(2, 1), is(true));
 	}
 
+	@Test
+	public void shouldReturnAdjacentVertices() {
+		graph.addEdge(1, 11)
+				.addEdge(1, 12)
+				.addEdge(1, 13)
+				.addEdge(1, 14);
+
+		assertThat(graph.getAdjacentVertices(1), containsInAnyOrder(11, 12, 13, 14));
+		assertThat(graph.getAdjacentVertices(11), containsInAnyOrder(1));
+		assertThat(graph.getAdjacentVertices(12), containsInAnyOrder(1));
+		assertThat(graph.getAdjacentVertices(13), containsInAnyOrder(1));
+		assertThat(graph.getAdjacentVertices(14), containsInAnyOrder(1));
+	}
 }

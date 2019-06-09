@@ -10,8 +10,8 @@ public class UndirectedGraph<V> extends AbstractUnweightedGraph<V> {
 	@Override
 	public Graph<V> addEdge(V from, V to) {
 		super.addEdge(from, to);
-		getAdjacentVertices().get(from).add(to);
-		getAdjacentVertices().get(to).add(from);
+		adjacentVertices(from).add(to);
+		adjacentVertices(to).add(from);
 		return this;
 	}
 }
