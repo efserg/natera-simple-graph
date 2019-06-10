@@ -31,7 +31,7 @@ public class BfsPathFinder<V> implements PathFinderStrategy<V> {
 
 		while (!queue.isEmpty()) {
 			final V next = queue.poll();
-//			visitedVertexes.add(next);
+			visitedVertexes.add(next);
 			graph.getAdjacentVertices(next).stream()
 					.filter(v -> !visitedVertexes.contains(v))
 					.forEachOrdered(v -> {
