@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 
-public class DirectedGraphTest {
+public class DirectedUnweightedGraphTest {
 
 	private Graph<Integer> graph;
 

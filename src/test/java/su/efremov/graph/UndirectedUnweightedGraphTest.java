@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 
-public class UndirectedGraphTest {
+public class UndirectedUnweightedGraphTest {
 
 	private Graph<Integer> graph;
 
